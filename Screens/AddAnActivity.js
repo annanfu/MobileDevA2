@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Background from '../Components/Background'
 
 
 export default function AddAnActivity({navigation}) {
   return (
-    <View>
+    <Background>
       <Text>AddAnActivity</Text>
-    </View>
+    </Background>
   )
 }
 

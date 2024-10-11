@@ -11,6 +11,8 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { themes } from './helper';
+import React, { useState } from 'react';
+import { ThemeContext } from './Contexts/themeContext'; // Import ThemeContext
 
 const Stack = createNativeStackNavigator(); // Create a navigation container reference
 const Tab = createBottomTabNavigator(); // Create a bottom tab navigator
@@ -56,7 +58,10 @@ function MyTabs() {
 }
 
 export default function App() {
+  const [theme, setTheme] = useState(themes.light); // Default to light theme
+
   return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -69,10 +74,15 @@ export default function App() {
           component={MyTabs}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="AddAnActivity" component={AddAnActivity} />
+        <Stack.Screen
+          name="AddAnActivity"
+          component={AddAnActivity}
+          options={{ title: "Add An Activity" }}
+        />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
+    </ThemeContext.Provider>
   );
 }
 
