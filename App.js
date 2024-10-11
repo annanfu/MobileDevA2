@@ -62,26 +62,26 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerTintColor: themes.light.text,
-          headerStyle: { backgroundColor: themes.light.primary },
-        }}
-      >
-        <Stack.Screen
-          name="Home"
-          component={MyTabs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="AddAnActivity"
-          component={AddAnActivity}
-          options={{ title: "Add An Activity" }}
-        />
-      </Stack.Navigator>
-      <StatusBar style="auto" />
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerTintColor: themes.light.text,
+            headerStyle: { backgroundColor: themes.light.primary },
+          }}
+        >
+          <Stack.Screen
+            name="Home"
+            component={MyTabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AddAnActivity"
+            component={AddAnActivity}
+            options={{ title: "Add An Activity" }}
+          />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </NavigationContainer>
     </ThemeContext.Provider>
   );
 }
