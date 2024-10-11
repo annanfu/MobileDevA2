@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function Activities() {
+export default function Activities({navigation}) {
   return (
     <FlatList>
       <View>

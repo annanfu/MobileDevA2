@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Activities from './Screens/Activities';
 import Diet from './Screens/Diet';
 import Settings from './Screens/Settings';
+import AddAnActivity from './Screens/AddAnActivity';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -36,7 +37,18 @@ function MyTabs() {
         },
       })}
     >
-      <Tab.Screen name="Activities" component={Activities} />
+      <Tab.Screen
+        name="Activities"
+        component={Activities}
+        options={({ navigation }) => ({
+          headerRight: () => (
+            <Button
+              onPress={() => navigation.navigate("AddAnActivity")}
+              title="Add"
+            />
+          ),
+        })}
+      />
       <Tab.Screen name="Diet" component={Diet} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
@@ -57,6 +69,7 @@ export default function App() {
           component={MyTabs}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="AddAnActivity" component={AddAnActivity} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
