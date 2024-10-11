@@ -13,7 +13,8 @@ export default function PrimaryText({ children }) {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 10,
+    fontWeight: "bold",
   },
 });

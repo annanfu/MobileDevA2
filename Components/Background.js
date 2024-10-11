@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, StatusBar } from "react-native";
 import React from "react";
 import { ThemeContext } from "../Contexts/themeContext";
 import { useContext } from "react";
@@ -8,7 +8,9 @@ export default function Background({ children }) {
   
   return (
     <View style={[styles.background, { backgroundColor: theme.background }]}>
-      {children}
+
+        <View style={styles.container}>{children}</View>
+
     </View>
   );
 }
@@ -17,6 +19,10 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+  },
+  container: {
+    justifyContent: "center",
+    flex: 1,
+    padding: 20,
   },
 });
