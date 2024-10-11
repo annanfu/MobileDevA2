@@ -7,6 +7,8 @@ import Activities from './Screens/Activities';
 import Diet from './Screens/Diet';
 import Settings from './Screens/Settings';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Stack = createNativeStackNavigator(); // Create a navigation container reference
 const Tab = createBottomTabNavigator(); // Create a bottom tab navigator
@@ -35,7 +37,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "Diet",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="walking" size={24} color="black" />
+            <MaterialIcons name="fastfood" size={24} color="black" />
           ),
         }}
       />
@@ -45,7 +47,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="walking" size={24} color="black" />
+            <Ionicons name="settings-sharp" size={24} color="black" />
           ),
         }}
       />
