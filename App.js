@@ -9,6 +9,7 @@ import Settings from './Screens/Settings';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { themes } from './helper';
 
 const Stack = createNativeStackNavigator(); // Create a navigation container reference
 const Tab = createBottomTabNavigator(); // Create a bottom tab navigator
@@ -17,61 +18,47 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Activities"
-      screenOptions={{
-        tabBarActiveTintColor: "#e91e63",
-      }}
+      screenOptions={({ route }) => ({
+        tabBarActiveTintColor: themes.light.active,
+        tabBarInactiveTintColor: themes.light.text,
+        tabBarStyle: { backgroundColor: themes.light.primary },
+        headerStyle: { backgroundColor: themes.light.primary },
+        headerTintColor: themes.light.text,
+        headerTitleStyle: { fontWeight: "bold" },
+        tabBarIcon: ({ color, size }) => {
+          if (route.name === "Activities") {
+            return <FontAwesome5 name="walking" size={size} color={color} />;
+          } else if (route.name === "Diet") {
+            return <MaterialIcons name="fastfood" size={size} color={color} />;
+          } else if (route.name === "Settings") {
+            return <Ionicons name="settings-sharp" size={size} color={color} />;
+          }
+        },
+      })}
     >
-      <Tab.Screen
-        name="Activities"
-        component={Activities}
-        options={{
-          tabBarLabel: "Activities",
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="walking" size={24} color="black" />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Diet"
-        component={Diet}
-        options={{
-          tabBarLabel: "Diet",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="fastfood" size={24} color="black" />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          tabBarLabel: "Settings",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-sharp" size={24} color="black" />
-          ),
-        }}
-      />
+      <Tab.Screen name="Activities" component={Activities} />
+      <Tab.Screen name="Diet" component={Diet} />
+      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 }
 
-
-
-
-
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerTintColor: themes.light.text,
+          headerStyle: { backgroundColor: themes.light.primary },
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={MyTabs}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Activities" component={Activities} />
-        <Stack.Screen name="Diet" component={Diet} />
-        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
+      <StatusBar style="auto" />
     </NavigationContainer>
   );
 }
