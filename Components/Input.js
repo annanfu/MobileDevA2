@@ -8,6 +8,7 @@ export default function Input({
   onChangeText,
   style,
   keyboardType = "default",
+  ...props
 }) {
   return (
     <TextInput
@@ -16,13 +17,15 @@ export default function Input({
       value={value}
       onChangeText={onChangeText}
       keyboardType={keyboardType}
+      {...props}
     />
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    //textAlign: "center",
+    
+    textAlignVertical: "top",
     marginBottom: 20,
     borderWidth: 2,
     borderRadius: 5,

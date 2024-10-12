@@ -7,6 +7,7 @@ import Activities from './Screens/Activities';
 import Diet from './Screens/Diet';
 import Settings from './Screens/Settings';
 import AddAnActivity from './Screens/AddAnActivity';
+import AddADiet from './Screens/AddADiet';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -52,7 +53,18 @@ function MyTabs() {
           ),
         })}
       />
-      <Tab.Screen name="Diet" component={Diet} />
+      <Tab.Screen
+        name="Diet"
+        component={Diet}
+        options={({ navigation }) => ({
+          headerRight: () => (
+            <Button
+              onPress={() => navigation.navigate("AddADiet")}
+              title="Add"
+            />
+          ),
+        })}
+      />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
@@ -64,26 +76,31 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <DataProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerTintColor: themes.light.text,
-            headerStyle: { backgroundColor: themes.light.primary },
-          }}
-        >
-          <Stack.Screen
-            name=" "
-            component={MyTabs}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="AddAnActivity"
-            component={AddAnActivity}
-            options={{ title: "Add An Activity" }}
-          />
-        </Stack.Navigator>
-        <StatusBar style="auto" />
-      </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerTintColor: themes.light.text,
+              headerStyle: { backgroundColor: themes.light.primary },
+            }}
+          >
+            <Stack.Screen
+              name=" "
+              component={MyTabs}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AddAnActivity"
+              component={AddAnActivity}
+              options={{ title: "Add An Activity" }}
+            />
+            <Stack.Screen
+              name="AddADiet"
+              component={AddADiet}
+              options={{ title: "Add A Diet" }}
+            />
+          </Stack.Navigator>
+          <StatusBar style="auto" />
+        </NavigationContainer>
       </DataProvider>
     </ThemeContext.Provider>
   );
