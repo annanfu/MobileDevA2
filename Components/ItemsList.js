@@ -7,7 +7,6 @@ import Item from "./Item";
 export default function ItemList({type}) {
   const { activities, diet } = useContext(DataContext);
   const data = type === "activity" ? activities : diet;
-  console.log(data);
 
   return (
     <FlatList

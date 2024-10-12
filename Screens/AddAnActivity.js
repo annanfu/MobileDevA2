@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Alert } from 'react-native'
+import { StyleSheet, Text, View, Button, Alert, ScrollView } from 'react-native'
 import React, {useContext, useState} from 'react'
 import Background from '../Components/Background'
 import PrimaryText from '../Components/PrimaryText'
@@ -13,7 +13,7 @@ import { themes } from '../helper'
 export default function AddAnActivity({navigation}) {
   const { addActivity } = useContext(DataContext); // Get the addActivity function from the context
   const [duration, setDuration] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
   
   const [open, setOpen] = useState(false);
   const [activity, setActivity] = useState(null);

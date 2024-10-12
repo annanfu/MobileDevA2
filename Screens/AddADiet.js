@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, Button, Alert, ScrollView } from "react-native";
 import React, { useContext, useState } from "react";
 import Background from "../Components/Background";
 import PrimaryText from "../Components/PrimaryText";
@@ -35,6 +35,7 @@ export default function AddADiet({ navigation }) {
   }
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
     <Background>
       <PrimaryText>Description *</PrimaryText>
       <Input
@@ -62,10 +63,17 @@ export default function AddADiet({ navigation }) {
         <Button title="Save" onPress={handleSave} />
       </ButtonArea>
     </Background>
+    </ScrollView>
+
   );
 }
 
 const styles = StyleSheet.create({
+
+    scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: "center",
+    },
   dropDownContainer: {
     borderColor: themes.light.primary,
     borderWidth: 2,
