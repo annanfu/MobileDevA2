@@ -70,7 +70,7 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="Home"
+            name=" "
             component={MyTabs}
             options={{ headerShown: false }}
           />

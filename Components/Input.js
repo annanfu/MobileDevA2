@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import React from "react";
-
+import { themes } from "../helper";
 
 
 export default function Input({
@@ -22,10 +22,15 @@ export default function Input({
 
 const styles = StyleSheet.create({
   input: {
-    textAlign: "center",
-    marginTop: 10,
+    //textAlign: "center",
+    marginBottom: 20,
+    borderWidth: 2,
     borderRadius: 5,
-    fontWeight: "bold",
-    fontSize: 20,
+    borderColor: themes.light.primary,
+    backgroundColor: themes.light.text,
+    fontSize: 18,
+    color: themes.light.primary,
+    padding: 5,
+
   },
 });

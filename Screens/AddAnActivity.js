@@ -6,10 +6,13 @@ import Input from '../Components/Input'
 
 
 export default function AddAnActivity({navigation}) {
+  const [duration, setDuration] = React.useState('');
   return (
     <Background>
       <PrimaryText>Activity *</PrimaryText>
       <PrimaryText>Duration (min) *</PrimaryText>
+      <Input onChangeText={(duration) => setDuration(duration)} value={duration} />
+
       <PrimaryText>Date *</PrimaryText>
     </Background>
   );
