@@ -13,6 +13,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { themes } from './helper';
 import React, { useState } from 'react';
 import { ThemeContext } from './Contexts/themeContext'; // Import ThemeContext
+import { DataProvider } from './Contexts/dataContext';
 
 const Stack = createNativeStackNavigator(); // Create a navigation container reference
 const Tab = createBottomTabNavigator(); // Create a bottom tab navigator
@@ -62,6 +63,7 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
+      <DataProvider>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -82,6 +84,7 @@ export default function App() {
         </Stack.Navigator>
         <StatusBar style="auto" />
       </NavigationContainer>
+      </DataProvider>
     </ThemeContext.Provider>
   );
 }
