@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, Alert } from 'react-native'
 import React, {useContext, useState} from 'react'
 import Background from '../Components/Background'
 import PrimaryText from '../Components/PrimaryText'
@@ -12,11 +12,11 @@ import { themes } from '../helper'
 
 export default function AddAnActivity({navigation}) {
   const { addActivity } = useContext(DataContext); // Get the addActivity function from the context
-  const [activity, setActivity] = useState(null);
   const [duration, setDuration] = useState("");
   const [date, setDate] = useState(new Date());
+  
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [activity, setActivity] = useState(null);
   const [items, setItems] = useState([
     { label: "Walking", value: "walking" },
     { label: "Running", value: "running" },
@@ -31,51 +31,56 @@ export default function AddAnActivity({navigation}) {
 
 
   function handleSave() {
+    console.log("Activity:", activity);
+    console.log("Duration:", duration);
+    console.log("Date:", date);
     if (!activity || isNaN(duration) || duration <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [{ text: "OK" }]);
       return;
     } else {
-      addActivity(activity, duration, date);
+      addActivity({
+        activity: activity,
+        duration: duration,
+        date: date,
+        isSpecial: (activity === 'running' || activity === 'weights') && duration > 60,
+        }
+     );
       navigation.goBack();
     }
   }
 
   return (
     <Background>
-      <View style={styles.topView}>
-        <PrimaryText>Activity *</PrimaryText>
-        <DropDownPicker
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-            onChangeItem={(item) => setActivity(item.value)}
-            placeholder="Select An Activity"
-            style={styles.dropDownContainer}
-            textStyle={styles.dropDownText}
-            placeholderStyle={styles.dropDownText}
-        />
-        <PrimaryText>Duration (min) *</PrimaryText>
-        <Input
-            onChangeText={(duration) => setDuration(duration)}
-            value={duration}
-        />
+      <PrimaryText>Activity *</PrimaryText>
+      <DropDownPicker
+        open={open}
+        value={activity}
+        items={items}
+        setOpen={setOpen}
+        setValue={setActivity}
+        setItems={setItems}
+        placeholder="Select An Activity"
+        style={styles.dropDownContainer}
+        textStyle={styles.dropDownText}
+        placeholderStyle={styles.dropDownText}
+      />
+      <PrimaryText>Duration (min) *</PrimaryText>
+      <Input
+        onChangeText={(duration) => setDuration(duration)}
+        value={duration}
+      />
 
-        <PrimaryText>Date *</PrimaryText>
-        <DatePicker
-            value={date}
-            onChange={(newDate) => setDate(newDate)}
-            display="default"
-        />
-      </View>
-      <View style={styles.bottomView}>
-        <ButtonArea>
-            <Button title="Cancel" onPress={() => navigation.goBack()} />
-            <Button title="Save" onPress={handleSave} />
-        </ButtonArea>
-      </View>
+      <PrimaryText>Date *</PrimaryText>
+      <DatePicker
+        value={date}
+        onChange={(newDate) => setDate(newDate)}
+        display="default"
+      />
+
+      <ButtonArea>
+        <Button title="Cancel" onPress={() => navigation.goBack()} />
+        <Button title="Save" onPress={handleSave} />
+      </ButtonArea>
     </Background>
   );
 }
@@ -91,14 +96,5 @@ const styles = StyleSheet.create({
   dropDownText: {
     fontSize: 18,
     color: themes.light.primary,
-  },
-  topView: {
-    flex: 4,
-    //justifyContent: "center",
-    //alignItems: "center",
-  },
-  bottomView: {
-    flex: 1,
-    //alignItems: "center",
   },
 });

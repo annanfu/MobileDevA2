@@ -7,6 +7,7 @@ export default function ButtonArea({ children }) {
 
 const styles = StyleSheet.create({
   buttonArea: {
+    marginTop: 180,
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
