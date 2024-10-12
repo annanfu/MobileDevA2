@@ -7,6 +7,7 @@ import Input from '../Components/Input'
 import DropDownPicker from 'react-native-dropdown-picker'
 import DatePicker from '../Components/DatePicker'
 import { DataContext } from '../Contexts/dataContext'
+import { themes } from '../helper'
 
 
 export default function AddAnActivity({navigation}) {
@@ -41,35 +42,63 @@ export default function AddAnActivity({navigation}) {
 
   return (
     <Background>
-      <PrimaryText>Activity *</PrimaryText>
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        onChangeItem={(item) => setActivity(item.value)}
-        placeholder="Select An Activity"
-      />
-      <PrimaryText>Duration (min) *</PrimaryText>
-      <Input
-        onChangeText={(duration) => setDuration(duration)}
-        value={duration}
-      />
+      <View style={styles.topView}>
+        <PrimaryText>Activity *</PrimaryText>
+        <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            onChangeItem={(item) => setActivity(item.value)}
+            placeholder="Select An Activity"
+            style={styles.dropDownContainer}
+            textStyle={styles.dropDownText}
+            placeholderStyle={styles.dropDownText}
+        />
+        <PrimaryText>Duration (min) *</PrimaryText>
+        <Input
+            onChangeText={(duration) => setDuration(duration)}
+            value={duration}
+        />
 
-      <PrimaryText>Date *</PrimaryText>
-      <DatePicker
-        value={date}
-        onChange={() => setDate(date)}
-        display="default"
-      />
-      <ButtonArea>
-        <Button title="Cancel" onPress={() => navigation.goBack()} />
-        <Button title="Save" onPress={handleSave} />
-      </ButtonArea>
+        <PrimaryText>Date *</PrimaryText>
+        <DatePicker
+            value={date}
+            onChange={(newDate) => setDate(newDate)}
+            display="default"
+        />
+      </View>
+      <View style={styles.bottomView}>
+        <ButtonArea>
+            <Button title="Cancel" onPress={() => navigation.goBack()} />
+            <Button title="Save" onPress={handleSave} />
+        </ButtonArea>
+      </View>
     </Background>
   );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  dropDownContainer: {
+    borderColor: themes.light.primary,
+    borderWidth: 2,
+    borderRadius: 5,
+    marginBottom: 20,
+    backgroundColor: themes.light.inputbackground,
+  },
+  dropDownText: {
+    fontSize: 18,
+    color: themes.light.primary,
+  },
+  topView: {
+    flex: 4,
+    //justifyContent: "center",
+    //alignItems: "center",
+  },
+  bottomView: {
+    flex: 1,
+    //alignItems: "center",
+  },
+});

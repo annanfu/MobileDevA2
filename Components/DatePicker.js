@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
     borderColor: themes.light.primary,
-    backgroundColor: themes.light.text,
+    backgroundColor: themes.light.inputbackground,
     fontSize: 18,
     color: themes.light.primary,
     padding: 5,
