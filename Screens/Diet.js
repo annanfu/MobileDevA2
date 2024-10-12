@@ -1,14 +1,14 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import ItemsList from "../Components/ItemsList";
+import Background from "../Components/Background";
 
 export default function Diet() {
   return (
-    <FlatList>
-        <View>
-        <Text>Diet</Text>
-        </View>
-    </FlatList>
-  )
+    <Background>
+      <ItemsList type="diet" />
+    </Background>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -18,13 +18,13 @@ export default function AddAnActivity({navigation}) {
   const [open, setOpen] = useState(false);
   const [activity, setActivity] = useState(null);
   const [items, setItems] = useState([
-    { label: "Walking", value: "walking" },
-    { label: "Running", value: "running" },
-    { label: "Swimming", value: "swimming" },
-    { label: "Weights", value: "weights" },
-    { label: "Yoga", value: "yoga" },
-    { label: "Cycling", value: "cycling" },
-    { label: "Hiking", value: "hiking" },
+    { label: "Walking", value: "Walking" },
+    { label: "Running", value: "Running" },
+    { label: "Swimming", value: "Swimming" },
+    { label: "Weights", value: "Weights" },
+    { label: "Yoga", value: "Yoga" },
+    { label: "Cycling", value: "Cycling" },
+    { label: "Hiking", value: "Hiking" },
   ]);
 
 
@@ -42,7 +42,7 @@ export default function AddAnActivity({navigation}) {
         activity: activity,
         duration: duration,
         date: date,
-        isSpecial: (activity === 'running' || activity === 'weights') && duration > 60,
+        isSpecial: (activity === 'Running' || activity === 'Weights') && duration > 60,
         }
      );
       navigation.goBack();
