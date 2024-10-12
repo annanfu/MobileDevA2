@@ -24,16 +24,14 @@ export default function Input({
 
 const styles = StyleSheet.create({
   input: {
-    
     textAlignVertical: "top",
-    marginBottom: 20,
-    borderWidth: 2,
-    borderRadius: 5,
+    marginBottom: themes.marginstyle.primary,
+    borderWidth: themes.borderwidth,
+    borderRadius: themes.borderradius,
     borderColor: themes.light.primary,
     backgroundColor: themes.light.inputbackground,
-    fontSize: 18,
+    fontSize: themes.fontsize.input,
     color: themes.light.primary,
-    padding: 5,
-
+    padding: themes.paddingstyle.text,
   },
 });

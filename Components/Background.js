@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, StatusBar } from "react-native";
 import React from "react";
 import { ThemeContext } from "../Contexts/themeContext";
 import { useContext } from "react";
+import { themes } from '../helper';
 
 export default function Background({ children }) {
   const { theme } = useContext(ThemeContext); // Access the current theme
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
   },
   container: {
     //justifyContent: "center",
-    marginTop: 20,
+    marginTop: themes.marginstyle.primary,
     flex: 1,
-    padding: 20,
+    padding: themes.paddingstyle.other,
   },
 });

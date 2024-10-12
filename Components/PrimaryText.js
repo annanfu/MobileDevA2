@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { ThemeContext } from "../Contexts/themeContext";
 import { useContext } from "react";
+import { themes } from "../helper";
 
 export default function PrimaryText({ children }) {
   const { theme } = useContext(ThemeContext); // Access the current theme
@@ -13,8 +14,8 @@ export default function PrimaryText({ children }) {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 15,
+    fontSize: themes.fontsize.primary,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: themes.marginstyle.text,
   },
 });

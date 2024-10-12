@@ -18,7 +18,7 @@ export default function Item({ item, type}) {
             name="warning"
             size={20}
             color={themes.light.active}
-            style={{ marginRight: 5 }}
+            style={{ marginRight: themes.marginstyle.text }}
           />
         )}
         <Text style={styles.itemText}>{item.date.toDateString()}</Text>
@@ -37,9 +37,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: themes.light.primary,
-    borderRadius: 5,
-    padding: 8,
-    marginBottom: 20,
+    borderRadius: themes.borderradius,
+    padding: themes.paddingstyle.text,
+    marginBottom: themes.marginstyle.primary,
   },
   leftContent: {
     flexDirection: "row",
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   itemName: {
     color: themes.light.background,
-    fontSize: 16,
+    fontSize: themes.fontsize.itemname,
     fontWeight: "bold",
   },
   rightContent: {
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
     color: themes.light.primary,
     backgroundColor: themes.light.text,
     fontWeight: "bold",
-    padding: 5,
-    margin: 3,
-    borderRadius: 5,
+    padding: themes.paddingstyle.text,
+    margin: themes.marginstyle.text,
+    borderRadius: themes.borderradius,
     minWidth: 80,
     textAlign: "center",
   },

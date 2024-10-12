@@ -55,7 +55,6 @@ export default function AddADiet({ navigation }) {
       <DatePicker
         value={date}
         onChange={(newDate) => setDate(newDate)}
-        display="default"
       />
 
       <ButtonArea>
@@ -69,20 +68,8 @@ export default function AddADiet({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-
     scrollViewContent: {
     flexGrow: 1,
     justifyContent: "center",
     },
-  dropDownContainer: {
-    borderColor: themes.light.primary,
-    borderWidth: 2,
-    borderRadius: 5,
-    marginBottom: 20,
-    backgroundColor: themes.light.inputbackground,
-  },
-  dropDownText: {
-    fontSize: 18,
-    color: themes.light.primary,
-  },
 });

@@ -10,6 +10,5 @@ const styles = StyleSheet.create({
     marginTop: 180,
     flexDirection: "row",
     justifyContent: "space-around",
-    padding: 10,
   },
 });

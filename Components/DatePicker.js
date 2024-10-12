@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Platform } from "react-native";
 import React, { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { themes } from "../helper";
@@ -65,12 +65,12 @@ export default function DatePicker({ value, onChange, style }) {
 
 const styles = StyleSheet.create({
   DateInput: {
-    borderWidth: 2,
-    borderRadius: 5,
+    borderWidth: themes.borderwidth,
+    borderRadius: themes.borderradius,
     borderColor: themes.light.primary,
     backgroundColor: themes.light.inputbackground,
-    fontSize: 18,
+    fontSize: themes.fontsize.input,
     color: themes.light.primary,
-    padding: 5,
+    padding: themes.paddingstyle.text,
   },
 });

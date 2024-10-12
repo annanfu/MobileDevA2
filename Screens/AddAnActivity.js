@@ -86,13 +86,13 @@ export default function AddAnActivity({navigation}) {
 const styles = StyleSheet.create({
   dropDownContainer: {
     borderColor: themes.light.primary,
-    borderWidth: 2,
-    borderRadius: 5,
-    marginBottom: 20,
+    borderWidth: themes.borderwidth,
+    borderRadius: themes.borderradius,
+    marginBottom: themes.marginstyle.primary,
     backgroundColor: themes.light.inputbackground,
   },
   dropDownText: {
-    fontSize: 18,
+    fontSize: themes.fontsize.input,
     color: themes.light.primary,
   },
 });

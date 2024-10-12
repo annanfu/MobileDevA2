@@ -10,4 +10,19 @@ export const themes = {
     primary: "#FFFFFF", // White for text on dark backgrounds in dark mode
     background: "#7d81b4", // Background color for the app in dark mode
   },
+  fontsize: {
+    input: 18,
+    primary: 15,
+    itemname: 16,
+  },
+  paddingstyle: {
+    text: 7,
+    other: 20,
+  },
+  borderradius: 5,
+  marginstyle: {
+    primary: 20,
+    text: 3,
+  },
+  borderwidth: 2,
 };
