@@ -9,10 +9,11 @@ import { DataContext } from "../Contexts/dataContext";
 import { themes } from "../helper";
 
 export default function AddADiet({ navigation }) {
-  const { addDiet } = useContext(DataContext); // Get the addActivity function from the context
+  const { addDiet } = useContext(DataContext); // Get the addDiet function from the context
+    const [description, setDescription] = useState("");
   const [calories, setCalories] = useState("");
   const [date, setDate] = useState(new Date());
-  const [description, setDescription] = useState(null);
+
 
 
   function handleSave() {
