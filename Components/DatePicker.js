@@ -47,7 +47,6 @@ export default function DatePicker({ value, onChange, style }) {
         style={styles.DateInput}
         value={formatDate(displayDate)}
         onPressIn={showDatepicker}
-        editable={false}
       />
       {show && (
         <DateTimePicker
