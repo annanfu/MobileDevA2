@@ -31,9 +31,7 @@ export default function AddAnActivity({navigation}) {
 
 
   function handleSave() {
-    console.log("Activity:", activity);
-    console.log("Duration:", duration);
-    console.log("Date:", date);
+
     if (!activity || isNaN(duration) || duration <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [{ text: "OK" }]);
       return;

@@ -10,16 +10,14 @@ import { themes } from "../helper";
 
 export default function AddADiet({ navigation }) {
   const { addDiet } = useContext(DataContext); // Get the addDiet function from the context
-    const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("");
   const [calories, setCalories] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
 
 
 
   function handleSave() {
-    console.log("Description:", description);
-    console.log("Calories:", calories);
-    console.log("Date:", date);
+
     if (!description || isNaN(calories) || calories <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [
         { text: "OK" },
@@ -46,7 +44,7 @@ export default function AddADiet({ navigation }) {
         multiline={true}
       />
 
-      <PrimaryText>Calories (min) *</PrimaryText>
+      <PrimaryText>Calories *</PrimaryText>
       <Input
         onChangeText={(calories) => setCalories(calories)}
         value={calories}

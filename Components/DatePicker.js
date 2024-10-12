@@ -1,61 +1,70 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, TextInput } from "react-native";
+import React, { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { themes } from "../helper";
 
-
 export default function DatePicker({ value, onChange, style }) {
-const [show, setShow] = useState(false);
-const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+  const [mode, setMode] = useState("date");
+  const [displayDate, setDisplayDate] = useState(null);
 
-const onChangeInternal = (event, selectedDate) => {
-  const currentDate = selectedDate || value;
-  setShow(false);
-  onChange(currentDate);
-};
+  const onChangeInternal = (event, selectedDate) => {
+    setShow(false);
+    if (selectedDate) {
+      setDisplayDate(selectedDate);
+      onChange(selectedDate);
+    }
+  };
 
-const showMode = (currentMode) => {
-setShow(true);
-setMode(currentMode);
-};
-  
   const showDatepicker = () => {
-    showMode("date");
+    const currentDate = new Date();
+    if (
+      show &&
+      displayDate &&
+      displayDate.toDateString() === currentDate.toDateString()
+    ) {
+      // If calendar is open and current date is already selected, close the calendar
+      setShow(false);
+      onChange(currentDate);
+    } else {
+      // Otherwise, show the calendar and set the current date
+      setDisplayDate(currentDate);
+      setShow(true);
+      if (!show) {
+        // Only call onChange if we're opening the calendar
+        onChange(currentDate);
+      }
+    }
   };
 
-  const showTimepicker = () => {
-    showMode("time");
+  const formatDate = (date) => {
+    return date ? date.toDateString() : "";
   };
 
-const formatDate = (date) => {
-  return date.toDateString();
-};
-
-return (
-  <View>
-    <TextInput
-      style={styles.DateInput}
-      value={formatDate(value)}
-      onPressIn={showDatepicker}
-      editable={false}
-    />
-    {show && (
-      <DateTimePicker
-        testID="dateTimePicker"
-        value={value}
-        mode={mode}
-        is24Hour={true}
-        display="inline"
-        onChange={onChangeInternal}
+  return (
+    <View>
+      <TextInput
+        style={styles.DateInput}
+        value={formatDate(displayDate)}
+        onPressIn={showDatepicker}
+        editable={false}
       />
-    )}
-  </View>
-);
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={displayDate || new Date()}
+          mode={mode}
+          is24Hour={true}
+          display="inline"
+          onChange={onChangeInternal}
+        />
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   DateInput: {
-    //textAlign: "center",
     marginBottom: 20,
     borderWidth: 2,
     borderRadius: 5,

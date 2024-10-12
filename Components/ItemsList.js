@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, { useContext } from "react";
 import { DataContext } from "../Contexts/dataContext";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Item from "./Item";
 
 

@@ -8,6 +8,6 @@ export const themes = {
   },
   dark: {
     primary: "#FFFFFF", // White for text on dark backgrounds in dark mode
-    background: "#6f73ab", // Background color for the app in dark mode
+    background: "#7d81b4", // Background color for the app in dark mode
   },
 };

@@ -25,9 +25,16 @@ function MyTabs() {
       initialRouteName="Activities"
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: themes.light.active,
-        tabBarInactiveTintColor: themes.light.text,
-        tabBarStyle: { backgroundColor: themes.light.primary },
-        headerStyle: { backgroundColor: themes.light.primary },
+        tabBarInactiveTintColor: themes.light.inputbackground,
+        tabBarStyle: {
+          backgroundColor: themes.light.primary,
+          borderTopWidth: 0, // This removes the top border of the tab bar
+        },
+        headerStyle: {
+          backgroundColor: themes.light.primary,
+          elevation: 0, // This removes the shadow on Android
+          shadowOpacity: 0, // This removes the shadow on iOS
+        },
         headerTintColor: themes.light.text,
         headerTitleStyle: { fontWeight: "bold" },
         tabBarIcon: ({ color, size }) => {
@@ -107,7 +114,5 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+
 });

@@ -14,10 +14,18 @@ export default function Settings() {
 
   return (
     <Background>
-      <Button title="Toggle" onPress={toggleTheme} />
+      <View style={styles.container}>
+        <Button title="Toggle" onPress={toggleTheme} />
+      </View>
     </Background>
   )
 }
 
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+})
