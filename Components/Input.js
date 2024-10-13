@@ -8,7 +8,7 @@ export default function Input({
   onChangeText,
   style,
   keyboardType = "default",
-  ...props
+  ...props // Any other props
 }) {
   return (
     <TextInput

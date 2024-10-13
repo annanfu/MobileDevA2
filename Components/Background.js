@@ -8,10 +8,9 @@ export default function Background({ children }) {
   const { theme } = useContext(ThemeContext); // Access the current theme
   
   return (
+    // render the background color based on the theme
     <View style={[styles.background, { backgroundColor: theme.background }]}>
-
         <View style={styles.container}>{children}</View>
-
     </View>
   );
 }
@@ -22,7 +21,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
-    //justifyContent: "center",
     marginTop: themes.marginstyle.primary,
     flex: 1,
     padding: themes.paddingstyle.other,

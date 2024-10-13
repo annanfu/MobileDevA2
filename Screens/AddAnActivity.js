@@ -12,9 +12,10 @@ import { themes } from '../helper'
 
 export default function AddAnActivity({navigation}) {
   const { addActivity } = useContext(DataContext); // Get the addActivity function from the context
-  const [duration, setDuration] = useState("");
-  const [date, setDate] = useState(null);
+  const [duration, setDuration] = useState("");  // a state variable to store the duration
+  const [date, setDate] = useState(null);  // a state variable to store the date
   
+  // state variables for the DropDownPicker used to select the activity
   const [open, setOpen] = useState(false);
   const [activity, setActivity] = useState(null);
   const [items, setItems] = useState([
@@ -27,15 +28,13 @@ export default function AddAnActivity({navigation}) {
     { label: "Hiking", value: "Hiking" },
   ]);
 
-
-
-
   function handleSave() {
-
+    // Check if the input values are valid
     if (!activity || isNaN(duration) || duration <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [{ text: "OK" }]);
       return;
     } else {
+      // Add the activity object to the data context
       addActivity({
         activity: activity,
         duration: duration,
@@ -43,7 +42,7 @@ export default function AddAnActivity({navigation}) {
         isSpecial: (activity === 'Running' || activity === 'Weights') && duration > 60,
         }
      );
-      navigation.goBack();
+      navigation.goBack();  // Go back to the previous screen
     }
   }
 
@@ -51,12 +50,12 @@ export default function AddAnActivity({navigation}) {
     <Background>
       <PrimaryText>Activity *</PrimaryText>
       <DropDownPicker
-        open={open}
-        value={activity}
-        items={items}
-        setOpen={setOpen}
-        setValue={setActivity}
-        setItems={setItems}
+        open={open}   // whether the dropdown is open
+        value={activity}   // the selected value
+        items={items}   // the list of items
+        setOpen={setOpen}   // function to set the open state variable
+        setValue={setActivity}   // function to set the activity state
+        setItems={setItems}   // function to set the items state
         placeholder="Select An Activity"
         style={styles.dropDownContainer}
         textStyle={styles.dropDownText}
@@ -71,13 +70,13 @@ export default function AddAnActivity({navigation}) {
       <PrimaryText>Date *</PrimaryText>
       <DatePicker
         value={date}
-        onChange={(newDate) => setDate(newDate)}
+        onChange={(newDate) => setDate(newDate)}  // update the date state variable
         display="default"
       />
 
       <ButtonArea>
         <Button title="Cancel" onPress={() => navigation.goBack()} />
-        <Button title="Save" onPress={handleSave} />
+        <Button title="Save" onPress={handleSave} />  
       </ButtonArea>
     </Background>
   );

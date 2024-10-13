@@ -6,8 +6,9 @@ import { themes } from '../helper';
 import Background from '../Components/Background';
 
 export default function Settings() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);  // Access the current theme
 
+  // Function to toggle the theme
   function toggleTheme() {
     setTheme((previousTheme) => (previousTheme === themes.light ? themes.dark : themes.light));
   }

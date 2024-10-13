@@ -14,18 +14,19 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { themes } from './helper';
 import React, { useState } from 'react';
 import { ThemeContext } from './Contexts/themeContext'; // Import ThemeContext
-import { DataProvider } from './Contexts/dataContext';
+import { DataProvider } from './Contexts/dataContext';  // Import DataProvider
 
 const Stack = createNativeStackNavigator(); // Create a navigation container reference
 const Tab = createBottomTabNavigator(); // Create a bottom tab navigator
 
+// Create a custom tab bar with icons 
 function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Activities"
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: themes.light.active,
-        tabBarInactiveTintColor: themes.light.inputbackground,
+        tabBarActiveTintColor: themes.light.active,   // Set the active tab color
+        tabBarInactiveTintColor: themes.light.inputbackground,  // Set the inactive tab color
         tabBarStyle: {
           backgroundColor: themes.light.primary,
           borderTopWidth: 0, // This removes the top border of the tab bar
@@ -35,9 +36,9 @@ function MyTabs() {
           elevation: 0, // This removes the shadow on Android
           shadowOpacity: 0, // This removes the shadow on iOS
         },
-        headerTintColor: themes.light.text,
-        headerTitleStyle: { fontWeight: "bold" },
-        tabBarIcon: ({ color, size }) => {
+        headerTintColor: themes.light.text,  // Set the header text color
+        headerTitleStyle: { fontWeight: "bold" },  // Set the header title style
+        tabBarIcon: ({ color, size }) => {  // Set the tab bar icons
           if (route.name === "Activities") {
             return <FontAwesome5 name="walking" size={size} color={color} />;
           } else if (route.name === "Diet") {
@@ -51,6 +52,7 @@ function MyTabs() {
       <Tab.Screen
         name="Activities"
         component={Activities}
+        // Add a button to the header to navigate to the AddAnActivity screen
         options={({ navigation }) => ({
           headerRight: () => (
             <Button
@@ -63,6 +65,7 @@ function MyTabs() {
       <Tab.Screen
         name="Diet"
         component={Diet}
+        // Add a button to the header to navigate to the AddADiet screen
         options={({ navigation }) => ({
           headerRight: () => (
             <Button
@@ -81,8 +84,9 @@ export default function App() {
   const [theme, setTheme] = useState(themes.light); // Default to light theme
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>  
       <DataProvider>
+        {/* Wrap the navigation container with the data provider */}
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
