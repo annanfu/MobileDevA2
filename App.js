@@ -14,7 +14,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { themes } from './helper';
 import React, { useState } from 'react';
-import HeaderPressable from "./Components/HeaderPressable";
+import PressableButton from './Components/PressableButton';
 
 
 
@@ -64,7 +64,7 @@ function MyTabs() {
         // Add a button to the header to navigate to the AddAnActivity screen
         options={({ navigation }) => ({
           headerRight: () => (
-            <HeaderPressable
+            <PressableButton
               pressedHandler={() => navigation.navigate("AddAnActivity")}
               screenType={"Activities"}
             />
@@ -77,7 +77,7 @@ function MyTabs() {
         // Add a button to the header to navigate to the AddADiet screen
         options={({ navigation }) => ({
           headerRight: () => (
-            <HeaderPressable
+            <PressableButton
               pressedHandler={() => navigation.navigate("AddADiet")}
               screenType={"Diet"}
             />
