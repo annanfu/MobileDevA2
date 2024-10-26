@@ -6,7 +6,7 @@ import Background from '../Components/Background';
 export default function Activities({ navigation }) {
   return (
     <Background>
-      <ItemsList type="activity" navigation={navigation} />
+      <ItemsList type="activities" navigation={navigation} />
     </Background>
   );
 }

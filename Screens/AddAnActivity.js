@@ -9,6 +9,7 @@ import DatePicker from '../Components/DatePicker'
 import { DataContext } from '../Contexts/dataContext'
 import { themes } from '../helper'
 import PressableButton from '../Components/PressableButton'
+import { writeToDB } from '../Firebase/firebaseHelper'
 
 
 export default function AddAnActivity({navigation}) {
@@ -35,14 +36,22 @@ export default function AddAnActivity({navigation}) {
       Alert.alert("Invalid Input", "Please check your input values", [{ text: "OK" }]);
       return;
     } else {
+      let newAciivity = {
+        activity: activity,
+        duration: duration,
+        date: date.toDateString(),
+        isSpecial:
+          (activity === "Running" || activity === "Weights") && duration > 60,
+      };
+      writeToDB(newAciivity, "activities");
       // Add the activity object to the data context
-      addActivity({
+      /*addActivity({
         activity: activity,
         duration: duration,
         date: date,
         isSpecial: (activity === 'Running' || activity === 'Weights') && duration > 60,
         }
-     );
+     );*/
       navigation.goBack();  // Go back to the previous screen
     }
   }
