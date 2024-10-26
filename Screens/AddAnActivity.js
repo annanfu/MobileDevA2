@@ -12,14 +12,16 @@ import PressableButton from '../Components/PressableButton'
 import { writeToDB } from '../Firebase/firebaseHelper'
 
 
-export default function AddAnActivity({navigation}) {
+export default function AddAnActivity({navigation, initialData}) {
 
-  const [duration, setDuration] = useState("");  // a state variable to store the duration
-  const [date, setDate] = useState(null);  // a state variable to store the date
+  const [duration, setDuration] = useState(initialData?.duration || "");  // a state variable to store the duration
+  const [date, setDate] = useState(
+    initialData?.date ? new Date(initialData.date) : null
+  );  // a state variable to store the date
   
   // state variables for the DropDownPicker used to select the activity
   const [open, setOpen] = useState(false);
-  const [activity, setActivity] = useState(null);
+  const [activity, setActivity] = useState(initialData?.activity || null);
   const [items, setItems] = useState([
     { label: "Walking", value: "Walking" },
     { label: "Running", value: "Running" },
@@ -32,6 +34,22 @@ export default function AddAnActivity({navigation}) {
 
   function handleSave() {
     // Check if the input values are valid
+    if (initialData) {
+      Alert.alert("Important", "Are you sure you want to save these changes?", [
+        { text: "No"},
+        {
+          text: "Yes",
+          onPress: () => {
+            saveData();
+          },
+        },
+      ]);
+    } else {
+      saveData();
+    }
+  }
+
+  function saveData() {
     if (!activity || isNaN(duration) || duration <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [{ text: "OK" }]);
       return;
@@ -55,6 +73,7 @@ export default function AddAnActivity({navigation}) {
       navigation.goBack();  // Go back to the previous screen
     }
   }
+
 
   return (
     <Background>
