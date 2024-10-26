@@ -6,14 +6,14 @@ import ButtonArea from '../Components/ButtonArea'
 import Input from '../Components/Input'
 import DropDownPicker from 'react-native-dropdown-picker'
 import DatePicker from '../Components/DatePicker'
-import { DataContext } from '../Contexts/dataContext'
+
 import { themes } from '../helper'
 import PressableButton from '../Components/PressableButton'
 import { writeToDB } from '../Firebase/firebaseHelper'
 
 
 export default function AddAnActivity({navigation}) {
-  const { addActivity } = useContext(DataContext); // Get the addActivity function from the context
+
   const [duration, setDuration] = useState("");  // a state variable to store the duration
   const [date, setDate] = useState(null);  // a state variable to store the date
   

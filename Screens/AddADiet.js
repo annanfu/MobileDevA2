@@ -5,12 +5,13 @@ import PrimaryText from "../Components/PrimaryText";
 import ButtonArea from "../Components/ButtonArea";
 import Input from "../Components/Input";
 import DatePicker from "../Components/DatePicker";
-import { DataContext } from "../Contexts/dataContext";
+
 import { themes } from "../helper";
 import PressableButton from "../Components/PressableButton";
+import { writeToDB } from "../Firebase/firebaseHelper";
 
 export default function AddADiet({ navigation }) {
-  const { addDiet } = useContext(DataContext); // Get the addDiet function from the context
+
   const [description, setDescription] = useState("");  // a state variable to store the description
   const [calories, setCalories] = useState("");  // a state variable to store the calories
   const [date, setDate] = useState(null);  // a state variable to store the date
@@ -25,13 +26,20 @@ export default function AddADiet({ navigation }) {
       ]);
       return;
     } else {
-      // Add the diet object to the data context
-      addDiet({
+      let newDiet = {
         description: description,
         calories: calories,
-        date: date,
-        isSpecial: calories > 800,    // if calories is greater than 800, then it is a special diet
-      }); 
+        date: date.toDateString(),
+        isSpecial: calories > 800, // if calories is greater than 800, then it is a special diet
+      };
+      writeToDB(newDiet, "diet");
+      // Add the diet object to the data context
+      /*addDiet({
+        description: description,
+        calories: calories,
+        date: date.toDateString(),
+        isSpecial: calories > 800, // if calories is greater than 800, then it is a special diet
+      }); */
       navigation.goBack(); // Go back to the previous screen
     }
   }
