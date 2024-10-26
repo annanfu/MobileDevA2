@@ -27,3 +27,12 @@ export async function updateData(data, collectionName, id) {
     console.log("Update data", err);
   }
 }
+
+export async function deleteData(collectionName, id) {
+  try {
+    await deleteDoc(doc(database, collectionName, id));
+    console.log("Document deleted");
+  } catch (err) {
+    console.log("Delete data", err);
+  }
+}

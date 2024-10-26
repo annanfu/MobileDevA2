@@ -8,6 +8,7 @@ import PressableButton from "../Components/PressableButton";
 // import { doc, deleteDoc } from "firebase/firestore";
 import { database } from "../Firebase/firebaseSetup";
 import { themes } from "../helper";
+import { doc, deleteData } from "../Firebase/firebaseHelper";
 
 export default function Edit({ route, navigation }) {
   const { item, type } = route.params;
@@ -36,15 +37,9 @@ export default function Edit({ route, navigation }) {
       },
       {
         text: "Yes",
-        onPress: async () => {
-          try {
-            const collectionName =
-              type === "activities" ? "activities" : "diet";
-            await deleteDoc(doc(database, collectionName, item.id));
+        onPress: () => {
+            deleteData(type, item.id);
             navigation.goBack();
-          } catch (error) {
-            Alert.alert("Error", "Failed to delete item");
-          }
         },
       },
     ]);
