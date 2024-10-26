@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Activities from './Screens/Activities';
 import Diet from './Screens/Diet';
+import Edit from './Screens/Edit';
 import Settings from './Screens/Settings';
 import AddAnActivity from './Screens/AddAnActivity';
 import AddADiet from './Screens/AddADiet';
@@ -92,7 +93,7 @@ export default function App() {
   const [theme, setTheme] = useState(themes.light); // Default to light theme
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>  
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       <DataProvider>
         {/* Wrap the navigation container with the data provider */}
         <NavigationContainer>
@@ -116,6 +117,11 @@ export default function App() {
               name="AddADiet"
               component={AddADiet}
               options={{ title: "Add A Diet" }}
+            />
+            <Stack.Screen
+              name="Edit"
+              component={Edit}
+              options={{ title: "Edit" }}
             />
           </Stack.Navigator>
           <StatusBar style="auto" />

@@ -3,6 +3,7 @@ import React from "react";
 
 export default function PressableButton({
   children,
+  componentStyle,
   pressedHandler,
   pressedStyle,
 }) {
@@ -11,7 +12,7 @@ export default function PressableButton({
       onPress={pressedHandler}
       style={({ pressed }) => [
         // the function can only apply to the style prop in the Pressable component
-        styles.defaultStyle, // default style
+        componentStyle, // style from the parent component
         pressed && styles.defaultPressedStyle, // default onpressed style
         pressed && pressedStyle,
       ]}
@@ -22,13 +23,9 @@ export default function PressableButton({
 }
 
 const styles = StyleSheet.create({
-  defaultStyle: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: "skyblue",
-  },
+
   defaultPressedStyle: {
-    backgroundColor: "pink",
+    //backgroundColor: "pink",
     opacity: 0.5,
   },
 });

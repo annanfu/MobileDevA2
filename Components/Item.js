@@ -2,10 +2,14 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { FontAwesome } from "@expo/vector-icons";
 import { themes } from '../helper';
+import PressableButton from './PressableButton';
 
-export default function Item({ item, type}) {
+export default function Item({ item, type, pressedHandler}) {
   const isActivity = type === "activity";   // a variable to check if the type is activity
   return (
+    <PressableButton
+      pressedHandler={pressedHandler}
+    >
     <View style={styles.container}>
       <View style={styles.leftContent}>
         <Text style={styles.itemName}>
@@ -28,6 +32,7 @@ export default function Item({ item, type}) {
         </Text> 
       </View>
     </View>
+    </PressableButton>
   );
 }
 
