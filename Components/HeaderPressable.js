@@ -3,7 +3,6 @@ import { StyleSheet, View, Pressable, Platform } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { themes } from "../helper";
 
@@ -32,7 +31,7 @@ export default function HeaderPressable({ screenType, pressedHandler }) {
         );
 
       default:
-        return null;
+        return;
     }
   };
 
