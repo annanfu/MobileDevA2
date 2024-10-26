@@ -13,11 +13,11 @@ import { writeToDB, updateData } from '../Firebase/firebaseHelper'
 
 
 export default function AddAnActivity({navigation, initialData}) {
-  console.log("Navigation:", navigation);
+  console.log(initialData);
 
   const [duration, setDuration] = useState(initialData?.duration || "");  // a state variable to store the duration
   const [date, setDate] = useState(
-    initialData?.date ? new Date(initialData.date) : null
+    initialData?.date || null
   );  // a state variable to store the date
   
   // state variables for the DropDownPicker used to select the activity

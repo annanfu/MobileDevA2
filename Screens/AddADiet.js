@@ -11,7 +11,6 @@ import PressableButton from "../Components/PressableButton";
 import { writeToDB } from "../Firebase/firebaseHelper";
 
 export default function AddADiet({ navigation }) {
-  console.log("Navigation:", navigation);
 
   const [description, setDescription] = useState("");  // a state variable to store the description
   const [calories, setCalories] = useState("");  // a state variable to store the calories

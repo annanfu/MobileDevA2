@@ -10,7 +10,6 @@ import { database } from "../Firebase/firebaseSetup";
 import { themes } from "../helper";
 
 export default function Edit({ route, navigation }) {
-  console.log("Edit Screen Navigation:", navigation);
   const { item, type } = route.params;
 
   // Convert the date string back to Date object before passing to Add screen
@@ -18,6 +17,8 @@ export default function Edit({ route, navigation }) {
     ...item,
     date: new Date(item.date), // Converts "Mon Jul 15 2024" back to Date object
   };
+
+  console.log("Edit converted item", convertedItem);
 
   // Set up delete button in header
   useEffect(() => {
