@@ -8,6 +8,7 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import DatePicker from '../Components/DatePicker'
 import { DataContext } from '../Contexts/dataContext'
 import { themes } from '../helper'
+import PressableButton from '../Components/PressableButton'
 
 
 export default function AddAnActivity({navigation}) {
@@ -75,8 +76,16 @@ export default function AddAnActivity({navigation}) {
       />
 
       <ButtonArea>
-        <Button title="Cancel" onPress={() => navigation.goBack()} />
-        <Button title="Save" onPress={handleSave} />  
+        <PressableButton
+          pressedHandler={() => navigation.goBack()}
+          text="Cancel"
+          componentStyle={{ backgroundColor: themes.light.cancel }}
+        />
+        <PressableButton
+          pressedHandler={handleSave}
+          text="Save"
+          componentStyle={{ backgroundColor: themes.light.primary }}
+        />  
       </ButtonArea>
     </Background>
   );

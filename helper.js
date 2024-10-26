@@ -5,6 +5,7 @@ export const themes = {
     text: "#FFFFFF", // White for text on dark backgrounds
     background: "#b7bade", // Background color for the app in light mode
     inputbackground: "lightgrey", // Background color for the input fields
+    cancel: "#ad1787", // Cancel button color
   },
   dark: {
     primary: "#FFFFFF", // White for text on dark backgrounds in dark mode
