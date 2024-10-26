@@ -13,8 +13,15 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { themes } from './helper';
 import React, { useState } from 'react';
+import HeaderPressable from "./Components/HeaderPressable";
+
+
+
 import { ThemeContext } from './Contexts/themeContext'; // Import ThemeContext
 import { DataProvider } from './Contexts/dataContext';  // Import DataProvider
+
+
+
 
 const Stack = createNativeStackNavigator(); // Create a navigation container reference
 const Tab = createBottomTabNavigator(); // Create a bottom tab navigator
@@ -25,8 +32,8 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Activities"
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: themes.light.active,   // Set the active tab color
-        tabBarInactiveTintColor: themes.light.inputbackground,  // Set the inactive tab color
+        tabBarActiveTintColor: themes.light.active, // Set the active tab color
+        tabBarInactiveTintColor: themes.light.inputbackground, // Set the inactive tab color
         tabBarStyle: {
           backgroundColor: themes.light.primary,
           borderTopWidth: 0, // This removes the top border of the tab bar
@@ -36,9 +43,10 @@ function MyTabs() {
           elevation: 0, // This removes the shadow on Android
           shadowOpacity: 0, // This removes the shadow on iOS
         },
-        headerTintColor: themes.light.text,  // Set the header text color
-        headerTitleStyle: { fontWeight: "bold" },  // Set the header title style
-        tabBarIcon: ({ color, size }) => {  // Set the tab bar icons
+        headerTintColor: themes.light.text, // Set the header text color
+        headerTitleStyle: { fontWeight: "bold" }, // Set the header title style
+        tabBarIcon: ({ color, size }) => {
+          // Set the tab bar icons
           if (route.name === "Activities") {
             return <FontAwesome5 name="walking" size={size} color={color} />;
           } else if (route.name === "Diet") {
@@ -55,9 +63,9 @@ function MyTabs() {
         // Add a button to the header to navigate to the AddAnActivity screen
         options={({ navigation }) => ({
           headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate("AddAnActivity")}
-              title="Add"
+            <HeaderPressable
+              pressedHandler={() => navigation.navigate("AddAnActivity")}
+              screenType={"Activities"}
             />
           ),
         })}
@@ -68,9 +76,9 @@ function MyTabs() {
         // Add a button to the header to navigate to the AddADiet screen
         options={({ navigation }) => ({
           headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate("AddADiet")}
-              title="Add"
+            <HeaderPressable
+              pressedHandler={() => navigation.navigate("AddADiet")}
+              screenType={"Diet"}
             />
           ),
         })}
