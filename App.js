@@ -19,7 +19,7 @@ import PressableButton from './Components/PressableButton';
 
 
 import { ThemeContext } from './Contexts/themeContext'; // Import ThemeContext
-import { DataProvider } from './Contexts/dataContext';  // Import DataProvider
+//import { DataProvider } from './Contexts/dataContext';  // Import DataProvider
 
 
 
@@ -94,7 +94,7 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <DataProvider>
+
         {/* Wrap the navigation container with the data provider */}
         <NavigationContainer>
           <Stack.Navigator
@@ -126,7 +126,7 @@ export default function App() {
           </Stack.Navigator>
           <StatusBar style="auto" />
         </NavigationContainer>
-      </DataProvider>
+
     </ThemeContext.Provider>
   );
 }

@@ -9,10 +9,11 @@ import DatePicker from '../Components/DatePicker'
 
 import { themes } from '../helper'
 import PressableButton from '../Components/PressableButton'
-import { writeToDB } from '../Firebase/firebaseHelper'
+import { writeToDB, updateData } from '../Firebase/firebaseHelper'
 
 
 export default function AddAnActivity({navigation, initialData}) {
+  console.log("Navigation:", navigation);
 
   const [duration, setDuration] = useState(initialData?.duration || "");  // a state variable to store the duration
   const [date, setDate] = useState(
@@ -54,14 +55,18 @@ export default function AddAnActivity({navigation, initialData}) {
       Alert.alert("Invalid Input", "Please check your input values", [{ text: "OK" }]);
       return;
     } else {
-      let newAciivity = {
+      let activityData = {
         activity: activity,
         duration: duration,
         date: date.toDateString(),
         isSpecial:
           (activity === "Running" || activity === "Weights") && duration > 60,
       };
-      writeToDB(newAciivity, "activities");
+      if (initialData) {
+        updateData(activityData, "activities", initialData.id);
+      } else {
+        writeToDB(activityData, "activities");
+      }
       // Add the activity object to the data context
       /*addActivity({
         activity: activity,
@@ -70,7 +75,7 @@ export default function AddAnActivity({navigation, initialData}) {
         isSpecial: (activity === 'Running' || activity === 'Weights') && duration > 60,
         }
      );*/
-      navigation.goBack();  // Go back to the previous screen
+      navigation.goBack();
     }
   }
 

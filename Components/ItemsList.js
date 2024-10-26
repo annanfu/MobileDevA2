@@ -6,6 +6,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { database } from "../Firebase/firebaseSetup";
 
 export default function ItemList({type, navigation}) {
+  console.log("Navigation in ItemsList:", navigation);
   const [data, setData] = useState([]);
   useEffect(() => {
     const unsubscribe = onSnapshot(

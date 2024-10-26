@@ -18,3 +18,12 @@ export async function writeToDB(data, collectionName) {
     console.log("Write to db", err);
   }
 }
+
+export async function updateData(data, collectionName, id) {
+  try {
+    await updateDoc(doc(database, collectionName, id), data);
+    console.log("Document updated");
+  } catch (err) {
+    console.log("Update data", err);
+  }
+}

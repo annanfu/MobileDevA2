@@ -10,6 +10,7 @@ import { database } from "../Firebase/firebaseSetup";
 import { themes } from "../helper";
 
 export default function Edit({ route, navigation }) {
+  console.log("Edit Screen Navigation:", navigation);
   const { item, type } = route.params;
 
   // Convert the date string back to Date object before passing to Add screen
@@ -38,7 +39,7 @@ export default function Edit({ route, navigation }) {
           try {
             const collectionName =
               type === "activities" ? "activities" : "diet";
-            await deleteDoc(doc(db, collectionName, item.id));
+            await deleteDoc(doc(database, collectionName, item.id));
             navigation.goBack();
           } catch (error) {
             Alert.alert("Error", "Failed to delete item");
@@ -48,13 +49,9 @@ export default function Edit({ route, navigation }) {
     ]);
   };
 
-  return (
-
-      type === "activities" ? (
-        <AddAnActivity initialData={convertedItem} />
-      ) : (
-        <AddADiet initialData={convertedItem} />
-      )
-
+  return type === "activities" ? (
+    <AddAnActivity initialData={convertedItem} navigation={navigation} />
+  ) : (
+    <AddADiet initialData={convertedItem} navigation={navigation} />
   );
 }
