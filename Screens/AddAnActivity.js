@@ -58,9 +58,12 @@ export default function AddAnActivity({navigation, initialData}) {
         activity: activity,
         duration: duration,
         date: date.toDateString(),
-        isSpecial: initialData?.isSpecial 
-        ? (removeSpecial ? false : true)
-        : (activity === "Running" || activity === "Weights") && duration > 60,
+        isSpecial: initialData?.isSpecial
+          ? removeSpecial
+            ? false
+            : ((activity === "Running" || activity === "Weights") &&
+              duration > 60)
+          : ((activity === "Running" || activity === "Weights") && duration) > 60,
       };
       if (initialData) {
         updateData(activityData, "activities", initialData.id);

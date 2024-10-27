@@ -49,8 +49,8 @@ export default function AddADiet({ navigation, initialData }) {
         isSpecial: initialData?.isSpecial
           ? removeSpecial
             ? false
-            : true
-          : (calories > 800), // if calories is greater than 800, then it is a special diet
+            : calories > 800
+          : calories > 800, // if calories is greater than 800, then it is a special diet
       };
       if (initialData) {
         updateData(newDiet, "diet", initialData.id);
