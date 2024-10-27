@@ -13,7 +13,6 @@ import { writeToDB, updateData } from '../Firebase/firebaseHelper'
 import SpecialCheckbox from "../Components/SpecialCheckbox";
 
 export default function AddAnActivity({navigation, initialData}) {
-  console.log(initialData);
 
   const [duration, setDuration] = useState(initialData?.duration || "");  // a state variable to store the duration
   const [date, setDate] = useState(initialData?.date || null);  // a state variable to store the date

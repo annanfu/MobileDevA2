@@ -8,18 +8,34 @@ import DatePicker from "../Components/DatePicker";
 
 import { themes } from "../helper";
 import PressableButton from "../Components/PressableButton";
-import { writeToDB } from "../Firebase/firebaseHelper";
+import { writeToDB, updateData } from "../Firebase/firebaseHelper";
+import SpecialCheckbox from "../Components/SpecialCheckbox";
 
-export default function AddADiet({ navigation }) {
-
-  const [description, setDescription] = useState("");  // a state variable to store the description
-  const [calories, setCalories] = useState("");  // a state variable to store the calories
-  const [date, setDate] = useState(null);  // a state variable to store the date
-
-
+export default function AddADiet({ navigation, initialData }) {
+  const [description, setDescription] = useState(initialData?.description || null); // a state variable to store the description
+  const [calories, setCalories] = useState(initialData?.calories || ""); // a state variable to store the calories
+  const [date, setDate] = useState(initialData?.date || null); // a state variable to store the date
+  const [removeSpecial, setRemoveSpecial] = useState(false);
 
   function handleSave() {
     // Check if the input values are valid
+    if (initialData) {
+      Alert.alert("Important", "Are you sure you want to save these changes?", [
+        { text: "No"},
+        {
+          text: "Yes",
+          onPress: () => {
+            saveData();
+          },
+        },
+      ]);
+    } else {
+      saveData();
+    }
+  }
+  
+
+  function saveData() {
     if (!description || isNaN(calories) || calories <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [
         { text: "OK" },
@@ -30,9 +46,17 @@ export default function AddADiet({ navigation }) {
         description: description,
         calories: calories,
         date: date.toDateString(),
-        isSpecial: calories > 800, // if calories is greater than 800, then it is a special diet
+        isSpecial: initialData?.isSpecial
+          ? removeSpecial
+            ? false
+            : true
+          : (calories > 800), // if calories is greater than 800, then it is a special diet
       };
-      writeToDB(newDiet, "diet");
+      if (initialData) {
+        updateData(newDiet, "diet", initialData.id);
+      } else {
+        writeToDB(newDiet, "diet");
+      }
       // Add the diet object to the data context
       /*addDiet({
         description: description,
@@ -40,9 +64,13 @@ export default function AddADiet({ navigation }) {
         date: date.toDateString(),
         isSpecial: calories > 800, // if calories is greater than 800, then it is a special diet
       }); */
-      navigation.goBack(); // Go back to the previous screen
+      navigation.goBack();
     }
-  }
+  }    
+
+
+
+
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -66,7 +94,19 @@ export default function AddADiet({ navigation }) {
           value={date}
           onChange={(newDate) => setDate(newDate)} // update the date state variable
         />
-
+        <View
+          style={
+            initialData?.isSpecial
+              ? styles.specialContainer
+              : styles.normalContainer
+          }
+        >
+          {initialData?.isSpecial && (
+            <SpecialCheckbox
+              value={removeSpecial}
+              onValueChange={(newValue) => setRemoveSpecial(newValue)}
+            />
+          )}
         <ButtonArea>
           <PressableButton
             pressedHandler={() => navigation.goBack()}
@@ -79,14 +119,21 @@ export default function AddADiet({ navigation }) {
             componentStyle={{ backgroundColor: themes.light.primary }}
           />
         </ButtonArea>
+                </View>
       </Background>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-    scrollViewContent: {
+  scrollViewContent: {
     flexGrow: 1,
     justifyContent: "center",
-    },
+  },
+  specialContainer: {
+    marginTop: 130,
+  },
+  normalContainer: {
+    marginTop: 180,
+  },
 });
