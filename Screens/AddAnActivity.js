@@ -96,43 +96,55 @@ export default function AddAnActivity({navigation, initialData}) {
         textStyle={styles.dropDownText}
         placeholderStyle={styles.dropDownText}
       />
-      <PrimaryText>Duration (min) *</PrimaryText>
-      <Input
-        onChangeText={(duration) => setDuration(duration)}
-        value={duration}
-      />
-
-      <PrimaryText>Date *</PrimaryText>
-      <DatePicker
-        value={date}
-        onChange={(newDate) => setDate(newDate)} // update the date state variable
-        display="default"
-      />
-
-      {initialData?.isSpecial && (
-        <SpecialCheckbox
-          value={removeSpecial}
-          onValueChange={(newValue) => setRemoveSpecial(newValue)}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <PrimaryText>Duration (min) *</PrimaryText>
+        <Input
+          onChangeText={(duration) => setDuration(duration)}
+          value={duration}
         />
-      )}
 
-      <ButtonArea>
-        <PressableButton
-          pressedHandler={() => navigation.goBack()}
-          text="Cancel"
-          componentStyle={{ backgroundColor: themes.light.cancel }}
+        <PrimaryText>Date *</PrimaryText>
+        <DatePicker
+          value={date}
+          onChange={(newDate) => setDate(newDate)} // update the date state variable
+          display="default"
         />
-        <PressableButton
-          pressedHandler={handleSave}
-          text="Save"
-          componentStyle={{ backgroundColor: themes.light.primary }}
-        />
-      </ButtonArea>
+        <View
+          style={
+            initialData?.isSpecial
+              ? styles.specialContainer
+              : styles.normalContainer
+          }
+        >
+          {initialData?.isSpecial && (
+            <SpecialCheckbox
+              value={removeSpecial}
+              onValueChange={(newValue) => setRemoveSpecial(newValue)}
+            />
+          )}
+
+          <ButtonArea>
+            <PressableButton
+              pressedHandler={() => navigation.goBack()}
+              text="Cancel"
+              componentStyle={{ backgroundColor: themes.light.cancel }}
+            />
+            <PressableButton
+              pressedHandler={handleSave}
+              text="Save"
+              componentStyle={{ backgroundColor: themes.light.primary }}
+            />
+          </ButtonArea>
+        </View>
+      </ScrollView>
     </Background>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContent: {
+    flexGrow: 1, // Allow the ScrollView to grow
+  },
   dropDownContainer: {
     borderColor: themes.light.primary,
     borderWidth: themes.borderwidth,
@@ -143,5 +155,11 @@ const styles = StyleSheet.create({
   dropDownText: {
     fontSize: themes.fontsize.input,
     color: themes.light.primary,
+  },
+  specialContainer: {
+    marginTop: 130,
+  },
+  normalContainer: {
+    marginTop: 180,
   },
 });

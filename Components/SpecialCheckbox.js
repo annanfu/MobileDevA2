@@ -17,7 +17,6 @@ export default function SpecialCheckbox({ value, onValueChange }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 200,
     flexDirection: "row",
     alignItems: "center",
     padding: 3,
