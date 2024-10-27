@@ -19,7 +19,6 @@ export default function Edit({ route, navigation }) {
     date: new Date(item.date), // Converts "Mon Jul 15 2024" back to Date object
   };
 
-  console.log("Edit converted item", convertedItem);
 
   // Set up delete button in header
   useEffect(() => {

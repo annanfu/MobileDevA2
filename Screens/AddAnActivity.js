@@ -10,15 +10,15 @@ import DatePicker from '../Components/DatePicker'
 import { themes } from '../helper'
 import PressableButton from '../Components/PressableButton'
 import { writeToDB, updateData } from '../Firebase/firebaseHelper'
-
+import SpecialCheckbox from "../Components/SpecialCheckbox";
 
 export default function AddAnActivity({navigation, initialData}) {
   console.log(initialData);
 
   const [duration, setDuration] = useState(initialData?.duration || "");  // a state variable to store the duration
-  const [date, setDate] = useState(
-    initialData?.date || null
-  );  // a state variable to store the date
+  const [date, setDate] = useState(initialData?.date || null);  // a state variable to store the date
+  const [removeSpecial, setRemoveSpecial] = useState(false);
+
   
   // state variables for the DropDownPicker used to select the activity
   const [open, setOpen] = useState(false);
@@ -59,8 +59,9 @@ export default function AddAnActivity({navigation, initialData}) {
         activity: activity,
         duration: duration,
         date: date.toDateString(),
-        isSpecial:
-          (activity === "Running" || activity === "Weights") && duration > 60,
+        isSpecial: initialData?.isSpecial 
+        ? (removeSpecial ? false : true)
+        : (activity === "Running" || activity === "Weights") && duration > 60,
       };
       if (initialData) {
         updateData(activityData, "activities", initialData.id);
@@ -84,12 +85,12 @@ export default function AddAnActivity({navigation, initialData}) {
     <Background>
       <PrimaryText>Activity *</PrimaryText>
       <DropDownPicker
-        open={open}   // whether the dropdown is open
-        value={activity}   // the selected value
-        items={items}   // the list of items
-        setOpen={setOpen}   // function to set the open state variable
-        setValue={setActivity}   // function to set the activity state
-        setItems={setItems}   // function to set the items state
+        open={open} // whether the dropdown is open
+        value={activity} // the selected value
+        items={items} // the list of items
+        setOpen={setOpen} // function to set the open state variable
+        setValue={setActivity} // function to set the activity state
+        setItems={setItems} // function to set the items state
         placeholder="Select An Activity"
         style={styles.dropDownContainer}
         textStyle={styles.dropDownText}
@@ -104,9 +105,16 @@ export default function AddAnActivity({navigation, initialData}) {
       <PrimaryText>Date *</PrimaryText>
       <DatePicker
         value={date}
-        onChange={(newDate) => setDate(newDate)}  // update the date state variable
+        onChange={(newDate) => setDate(newDate)} // update the date state variable
         display="default"
       />
+
+      {initialData?.isSpecial && (
+        <SpecialCheckbox
+          value={removeSpecial}
+          onValueChange={(newValue) => setRemoveSpecial(newValue)}
+        />
+      )}
 
       <ButtonArea>
         <PressableButton
@@ -118,7 +126,7 @@ export default function AddAnActivity({navigation, initialData}) {
           pressedHandler={handleSave}
           text="Save"
           componentStyle={{ backgroundColor: themes.light.primary }}
-        />  
+        />
       </ButtonArea>
     </Background>
   );
