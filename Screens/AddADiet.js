@@ -131,9 +131,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   specialContainer: {
-    marginTop: 130,
+    marginTop: themes.marginstyle.special,
   },
   normalContainer: {
-    marginTop: 180,
+    marginTop: themes.marginstyle.normal,
   },
 });

@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 3,
-    marginVertical: 10,
+    padding: themes.paddingstyle.small,
+    marginVertical: themes.marginstyle.primary,
   },
   label: {
     flex: 1,
-    marginRight: 4,
+    marginRight: themes.marginstyle.text,
     color: themes.light.primary,
     fontSize: themes.fontsize.primary,
     fontWeight: "bold",

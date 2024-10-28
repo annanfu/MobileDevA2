@@ -17,13 +17,18 @@ export const themes = {
     itemname: 16,
   },
   paddingstyle: {
+    small: 3,
     text: 7,
     other: 20,
   },
   borderradius: 5,
   marginstyle: {
+    normal: 180,
+    special: 130,
     primary: 20,
+    mid: 10,
     text: 3,
   },
   borderwidth: 2,
+
 };

@@ -159,9 +159,9 @@ const styles = StyleSheet.create({
     color: themes.light.primary,
   },
   specialContainer: {
-    marginTop: 130,
+    marginTop: themes.marginstyle.special,
   },
   normalContainer: {
-    marginTop: 180,
+    marginTop: themes.marginstyle.normal,
   },
 });

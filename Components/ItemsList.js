@@ -28,9 +28,6 @@ export default function ItemList({type, navigation}) {
   }, []);
 
 
-
-
-
   //const { activities, diet } = useContext(DataContext);
   //const data = type === "activity" ? activities : diet;   // if type is activity, then data is activities, else diet
 

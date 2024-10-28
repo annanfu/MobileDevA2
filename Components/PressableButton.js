@@ -68,9 +68,8 @@ export default function PressableButton({
 
 const styles = StyleSheet.create({
   headerStyle: {
-    marginRight: 5,
-    padding: 8,
-    borderRadius: 20,
+    marginRight: themes.marginstyle.mid,
+    padding: themes.paddingstyle.text,
   },
   iconContainer: {
     flexDirection: "row",
@@ -78,8 +77,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     minWidth: 150,
-    borderRadius: 5,
-    padding: 7,
+    borderRadius: themes.borderradius,
+    padding: themes.paddingstyle.text,
     alignItems: "center",
     justifyContent: "center",
   },
