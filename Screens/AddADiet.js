@@ -15,46 +15,54 @@ export default function AddADiet({ navigation, initialData }) {
   const [description, setDescription] = useState(initialData?.description || null); // a state variable to store the description
   const [calories, setCalories] = useState(initialData?.calories || ""); // a state variable to store the calories
   const [date, setDate] = useState(initialData?.date || null); // a state variable to store the date
-  const [removeSpecial, setRemoveSpecial] = useState(false);
+  const [removeSpecial, setRemoveSpecial] = useState(false);  // a state variable to store the special status
 
   function handleSave() {
-    // Check if the input values are valid
+    // If the user is editing an existing diet
     if (initialData) {
       Alert.alert("Important", "Are you sure you want to save these changes?", [
         { text: "No"},
         {
           text: "Yes",
+          // If the user confirms, save the data
           onPress: () => {
             saveData();
           },
         },
       ]);
     } else {
+      // If the user is adding a new diet, save the data
       saveData();
     }
   }
   
 
   function saveData() {
+    // validate the input values
     if (!description || isNaN(calories) || calories <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [
         { text: "OK" },
       ]);
       return;
     } else {
+      // If the input values are valid, create or update the diet object
       let newDiet = {
         description: description,
         calories: calories,
         date: date.toDateString(),
+        // if calories is greater than 800, then it is a special diet
         isSpecial: initialData?.isSpecial
-          ? removeSpecial
+          ? // If the diet is special, check if the user wants to remove the special status
+            removeSpecial
             ? false
             : calories > 800
-          : calories > 800, // if calories is greater than 800, then it is a special diet
+          : calories > 800, 
       };
       if (initialData) {
+        // If the user is editing an existing diet, update the diet object
         updateData(newDiet, "diet", initialData.id);
       } else {
+        // If the user is adding a new diet, write the diet object to the database
         writeToDB(newDiet, "diet");
       }
       // Add the diet object to the data context
@@ -67,9 +75,6 @@ export default function AddADiet({ navigation, initialData }) {
       navigation.goBack();
     }
   }    
-
-
-
 
 
   return (
@@ -104,7 +109,7 @@ export default function AddADiet({ navigation, initialData }) {
           {initialData?.isSpecial && (
             <SpecialCheckbox
               value={removeSpecial}
-              onValueChange={(newValue) => setRemoveSpecial(newValue)}
+              onValueChange={(newValue) => setRemoveSpecial(newValue)} // If the user wants to remove the special status, check the box
             />
           )}
         <ButtonArea>

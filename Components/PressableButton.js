@@ -7,14 +7,15 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function PressableButton({
-  children,
-  componentStyle,
-  pressedHandler,
-  pressedStyle,
-  text,
-  screenType,
+  children, // for custom components
+  componentStyle, // style from the parent component
+  pressedHandler, // function to handle the press
+  pressedStyle, // style when pressed
+  text, // text to display
+  screenType, // type of screen activity, diet, edit
 }) {
   const getIcons = () => {
+    // return the header right icons based on the screen type
     switch (screenType) {
       case "Activities":
         return (
@@ -57,7 +58,7 @@ export default function PressableButton({
     >
       {screenType ? (
         getIcons()
-      ) : text ? (
+      ) : text ? ( // if text is provided then display the custom button
         <Text style={styles.buttonText}>{text}</Text>
       ) : (
         children

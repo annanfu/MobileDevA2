@@ -16,7 +16,7 @@ export default function AddAnActivity({navigation, initialData}) {
 
   const [duration, setDuration] = useState(initialData?.duration || "");  // a state variable to store the duration
   const [date, setDate] = useState(initialData?.date || null);  // a state variable to store the date
-  const [removeSpecial, setRemoveSpecial] = useState(false);
+  const [removeSpecial, setRemoveSpecial] = useState(false);  // a state variable to store the special status
 
   
   // state variables for the DropDownPicker used to select the activity
@@ -33,32 +33,38 @@ export default function AddAnActivity({navigation, initialData}) {
   ]);
 
   function handleSave() {
-    // Check if the input values are valid
+    // If the user is editing an existing activity
     if (initialData) {
       Alert.alert("Important", "Are you sure you want to save these changes?", [
         { text: "No"},
         {
           text: "Yes",
           onPress: () => {
+            // If the user confirms, save the data
             saveData();
           },
         },
       ]);
     } else {
+      // If the user is adding a new activity, save the data
       saveData();
     }
   }
 
   function saveData() {
+    // validate the input values
     if (!activity || isNaN(duration) || duration <= 0 || !date) {
       Alert.alert("Invalid Input", "Please check your input values", [{ text: "OK" }]);
       return;
     } else {
+      // If the input values are valid, create or update the activity object
       let activityData = {
         activity: activity,
         duration: duration,
         date: date.toDateString(),
+        // If the activity is Running or Weights and the duration is greater than 60 minutes, mark it as special
         isSpecial: initialData?.isSpecial
+        // If the activity is special, check if the user wants to remove the special status
           ? removeSpecial
             ? false
             : ((activity === "Running" || activity === "Weights") &&
@@ -66,8 +72,10 @@ export default function AddAnActivity({navigation, initialData}) {
           : ((activity === "Running" || activity === "Weights") && duration) > 60,
       };
       if (initialData) {
+        // If the user is editing an existing activity, update the data
         updateData(activityData, "activities", initialData.id);
       } else {
+        // If the user is adding a new activity, write the data to the database
         writeToDB(activityData, "activities");
       }
       // Add the activity object to the data context
@@ -121,7 +129,7 @@ export default function AddAnActivity({navigation, initialData}) {
           {initialData?.isSpecial && (
             <SpecialCheckbox
               value={removeSpecial}
-              onValueChange={(newValue) => setRemoveSpecial(newValue)}
+              onValueChange={(newValue) => setRemoveSpecial(newValue)} // If the user wants to remove the special status, check the box
             />
           )}
 
