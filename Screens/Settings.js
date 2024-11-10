@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../Contexts/themeContext";
 import { themes } from '../helper';
 import Background from '../Components/Background';
+import PressableButton from '../Components/PressableButton';
 
 export default function Settings() {
   const { theme, setTheme } = useContext(ThemeContext);  // Access the current theme
@@ -16,10 +17,14 @@ export default function Settings() {
   return (
     <Background>
       <View style={styles.container}>
-        <Button title="Toggle" onPress={toggleTheme} />
+        <PressableButton
+          text="Toggle Theme"
+          pressedHandler={toggleTheme}
+          componentStyle={{ backgroundColor: themes.light.primary }}
+        />
       </View>
     </Background>
-  )
+  );
 }
 
 

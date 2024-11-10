@@ -2,32 +2,36 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { FontAwesome } from "@expo/vector-icons";
 import { themes } from '../helper';
+import PressableButton from './PressableButton';
 
-export default function Item({ item, type}) {
-  const isActivity = type === "activity";   // a variable to check if the type is activity
+export default function Item({ item, type, pressedHandler}) {
+  const isActivity = type === "activities";   // a variable to check if the type is activity
   return (
-    <View style={styles.container}>
-      <View style={styles.leftContent}>
-        <Text style={styles.itemName}>
-          {isActivity ? item.activity : item.description}  {/* if the type is activity then display the activity else display the description */}
-        </Text>
+    <PressableButton pressedHandler={pressedHandler}>
+      <View style={styles.container}>
+        <View style={styles.leftContent}>
+          <Text style={styles.itemName}>
+            {isActivity ? item.activity : item.description}{" "}
+            {/* if the type is activity then display the activity else display the description */}
+          </Text>
+        </View>
+        <View style={styles.rightContent}>
+          {item.isSpecial && (
+            <FontAwesome
+              name="warning"
+              size={20}
+              color={themes.light.active}
+              style={{ marginRight: themes.marginstyle.text }}
+            />
+          )}
+          {/* render the date and duration or calories based on the type*/}
+          <Text style={styles.itemText}>{item.date}</Text>
+          <Text style={styles.itemText}>
+            {isActivity ? `${item.duration} min` : `${item.calories}`}
+          </Text>
+        </View>
       </View>
-      <View style={styles.rightContent}>
-        {item.isSpecial && (
-          <FontAwesome
-            name="warning"
-            size={20}
-            color={themes.light.active}
-            style={{ marginRight: themes.marginstyle.text }} 
-          />
-        )}
-        {/* render the date and duration or calories based on the type */}
-        <Text style={styles.itemText}>{item.date.toDateString()}</Text> 
-        <Text style={styles.itemText}>
-          {isActivity ? `${item.duration} min` : `${item.calories}`} 
-        </Text> 
-      </View>
-    </View>
+    </PressableButton>
   );
 }
 

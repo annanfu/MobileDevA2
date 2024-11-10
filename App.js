@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Activities from './Screens/Activities';
 import Diet from './Screens/Diet';
+import Edit from './Screens/Edit';
 import Settings from './Screens/Settings';
 import AddAnActivity from './Screens/AddAnActivity';
 import AddADiet from './Screens/AddADiet';
@@ -13,8 +14,15 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { themes } from './helper';
 import React, { useState } from 'react';
+import PressableButton from './Components/PressableButton';
+
+
+
 import { ThemeContext } from './Contexts/themeContext'; // Import ThemeContext
-import { DataProvider } from './Contexts/dataContext';  // Import DataProvider
+//import { DataProvider } from './Contexts/dataContext';  // Import DataProvider
+
+
+
 
 const Stack = createNativeStackNavigator(); // Create a navigation container reference
 const Tab = createBottomTabNavigator(); // Create a bottom tab navigator
@@ -25,8 +33,8 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Activities"
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: themes.light.active,   // Set the active tab color
-        tabBarInactiveTintColor: themes.light.inputbackground,  // Set the inactive tab color
+        tabBarActiveTintColor: themes.light.active, // Set the active tab color
+        tabBarInactiveTintColor: themes.light.inputbackground, // Set the inactive tab color
         tabBarStyle: {
           backgroundColor: themes.light.primary,
           borderTopWidth: 0, // This removes the top border of the tab bar
@@ -36,9 +44,10 @@ function MyTabs() {
           elevation: 0, // This removes the shadow on Android
           shadowOpacity: 0, // This removes the shadow on iOS
         },
-        headerTintColor: themes.light.text,  // Set the header text color
-        headerTitleStyle: { fontWeight: "bold" },  // Set the header title style
-        tabBarIcon: ({ color, size }) => {  // Set the tab bar icons
+        headerTintColor: themes.light.text, // Set the header text color
+        headerTitleStyle: { fontWeight: "bold" }, // Set the header title style
+        tabBarIcon: ({ color, size }) => {
+          // Set the tab bar icons
           if (route.name === "Activities") {
             return <FontAwesome5 name="walking" size={size} color={color} />;
           } else if (route.name === "Diet") {
@@ -55,9 +64,9 @@ function MyTabs() {
         // Add a button to the header to navigate to the AddAnActivity screen
         options={({ navigation }) => ({
           headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate("AddAnActivity")}
-              title="Add"
+            <PressableButton
+              pressedHandler={() => navigation.navigate("AddAnActivity")}
+              screenType={"Activities"}
             />
           ),
         })}
@@ -68,9 +77,9 @@ function MyTabs() {
         // Add a button to the header to navigate to the AddADiet screen
         options={({ navigation }) => ({
           headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate("AddADiet")}
-              title="Add"
+            <PressableButton
+              pressedHandler={() => navigation.navigate("AddADiet")}
+              screenType={"Diet"}
             />
           ),
         })}
@@ -84,8 +93,8 @@ export default function App() {
   const [theme, setTheme] = useState(themes.light); // Default to light theme
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>  
-      <DataProvider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+
         {/* Wrap the navigation container with the data provider */}
         <NavigationContainer>
           <Stack.Navigator
@@ -109,10 +118,15 @@ export default function App() {
               component={AddADiet}
               options={{ title: "Add A Diet" }}
             />
+            <Stack.Screen
+              name="Edit"
+              component={Edit}
+              options={{ title: "Edit" }}
+            />
           </Stack.Navigator>
           <StatusBar style="auto" />
         </NavigationContainer>
-      </DataProvider>
+
     </ThemeContext.Provider>
   );
 }
